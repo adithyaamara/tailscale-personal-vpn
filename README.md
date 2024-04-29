@@ -3,6 +3,9 @@ A Personal, Free VPN service powered by Tailscale.
 
 **This python script automatically deploys an authenticated tailscale exit node into a [PlayWithDocker](https://labs.play-with-docker.com/) lab instance.**
 
+> Script tested on windows PC, Chrome WebDriver selenium automation.
+
+
 ## Pre-Reads
 1. Familiarize yourslef with PlayWithDocker -> [Docs](https://www.docker.com/play-with-docker/) , [Lab](https://labs.play-with-docker.com/)
 2. Familiarize yourslef with Tailscale -> [TailScale-WebSite](https://tailscale.com/), [Docs](https://tailscale.com/kb/1017/install), [ExitNode Private VPN](https://tailscale.com/kb/1103/exit-nodes)
