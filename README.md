@@ -1,7 +1,7 @@
 # tailscale-personal-vpn
 A Personal, Free VPN service powered by Tailscale.
 
-**This python script automatically deploys an authenticated tailscale exit node into a [PlayWithDocker](https://labs.play-with-docker.com/) lab instance.**
+**This python selenium script automatically deploys an authenticated tailscale exit node into a [PlayWithDocker](https://labs.play-with-docker.com/) lab instance.**
 
 > Script tested on windows PC, Chrome WebDriver selenium automation.
 
@@ -14,7 +14,7 @@ A Personal, Free VPN service powered by Tailscale.
 
 1. A docker hub account -> Create at: https://hub.docker.com/signup [Only use email, username, password method, as we need these 2 in later steps]
 2. A TailScale account -> Cretae at: https://login.tailscale.com/
-3. A TailScale Tag, ACL Rule.
+3. A TailScale Tag, ACL Rule. [Just one time activity, to avoid manual intervention]
    > In tailscale, Newly added exit nodes must be manually approved by logging into admin console, To avoid that, we can create a tag, ACL Rule once, that makes tailscale to auto approve newly created exit node.
    - Go to https://login.tailscale.com/admin/acls/file
    - Paste the following code snippets inside ACL file. [Do Not overwrite existing code, just add this snippets only]
@@ -46,7 +46,15 @@ docker_username="dockerhub_username"
 docker_password="dockerhub_password"
 tailscale_auth_key="createThis@https://login.tailscale.com/admin/settings/keys"
 ```
-3. Run the script: `python deploy.py`
+3. Run the script: `python deploy.py` [You will see chrome tabs opening, ui actions performed automatically, a docker run command running in a PWD VM terminal]
    > As soon as the script runs, you will see a new exit node device (named `node1`) in your [tailscale dashboard](https://login.tailscale.com/admin/machines).
 4. Open Tailscale app in your Android / any client device that is logged into tailscale, Select "Use Exit Node" in Options, select "node1" as exit node.
 5. You can confirm if VPN Is working or not by visiting https://whatismyipaddress.com/ website and check IP Location. Do this before connecting to tailscale, and after connecting to exit node, you should notice a different location.
+
+
+## Conclusion
+1. The device where you are using "Use Exit Node" option, All the device traffic will flow through this newly procured docker container in PWD VM.
+2. Evidently from above setup, This VPN is currently single node, your public IP shows up as public ip of Play With Docker VM running your exit node container [Location is somewhere random server in USA] Verify by visiting https://whatismyipaddress.com/ website.
+3. Means, you still get access to certain services that are geo location restricted.
+4. PWD has a limit of 4 hour session, so you need to repeat the process if the session temrinates.
+> You get a single node VPN for free for a max of uninterrupted 4 hour sessions : )
